@@ -6,8 +6,8 @@ import NavGate from "@/components/NavGate";
 export const metadata: Metadata = {
   title: "Weongyu Jeon",
   description: "Weongyu Jeon - Data",
-  metadataBase: new URL("https://edwinjeon.vercel.app"),
-  icons: { icon: "/favicon.ico" },
+  metadataBase: new URL("https://weongyujeon.com"),
+  icons: { icon: "/favicon.png" },
 };
 
 
