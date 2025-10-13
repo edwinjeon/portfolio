@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -41,14 +42,44 @@ export default function TopBar() {
           })}
         </nav>
 
-        {/* Right: status */}
-        <div
-          className="min-w-0 text-[13px] leading-none text-slate-300"
-          style={{ fontFamily: "var(--font-formula)", letterSpacing: "0.02em" }}
-          aria-hidden
+        {/* Right: social icons */}
+      <div className="flex items-center gap-5 text-slate-300">
+        <Link
+          href="https://github.com/edwinjeon"
+          target="_blank"
+          aria-label="GitHub"
+          className="hover:text-white transition-colors"
         >
-          Dark Mode On
-        </div>
+          <Github className="w-5 h-5" />
+        </Link>
+
+        <Link
+          href="https://www.linkedin.com/in/weongyujeon/"
+          target="_blank"
+          aria-label="LinkedIn"
+          className="hover:text-white transition-colors"
+        >
+          <Linkedin className="w-5 h-5" />
+        </Link>
+
+        <Link
+          href="https://www.kaggle.com/ratin21"
+          target="_blank"
+          aria-label="Kaggle"
+          className="hover:text-white transition-colors font-semibold text-[15px]"
+        >
+          K
+        </Link>
+
+        <Link
+          href="mailto:weongyujeon@gmail.com"
+          aria-label="Email"
+          className="hover:text-white transition-colors"
+        >
+          <Mail className="w-5 h-5" />
+        </Link>
+      </div>
+
       </div>
 
       {/* bottom divider */}
