@@ -1,26 +1,65 @@
+/* Tailwind v4 */
 @import "tailwindcss";
 
+/* ── Theme tokens ─────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0B0F1E; /* dark navy-black */
+  --foreground: #E5E7EB; /* slate-200-ish */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Crisp text */
+html, body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Subtle selection */
+::selection {
+  background: #F9731633; /* orange-500 @ ~20% */
+}
+
+/* ── Base layer: colors + typography bindings ─────────────────── */
+@layer base {
+  html, body {
+    @apply min-h-screen;
+    background-color: var(--background);
+    color: var(--foreground);
+
+    /* Bind the global body font from next/font variable */
+    font-family: var(--font-body), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  main, section, article {
+    background-color: transparent;
+  }
+
+  /* Headings and “titles” (About/Projects/Detail titles) use the display font */
+  h1, h2, h3,
+  .heading, .section-title, .project-title {
+    font-family: var(--font-home-display), var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.015em;
+  }
+
+  /* Optional: sensible heading scales (tweak as you like) */
+  h1, .heading-1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
+  h2, .heading-2 { font-size: clamp(20px, 3vw, 28px); line-height: 1.15; }
+  h3, .heading-3 { font-size: clamp(18px, 2.5vw, 22px); line-height: 1.2; }
+
+  /* Monospace for code-ish bits (matches your formula cells) */
+  code, kbd, samp, .codeish {
+    font-family: var(--font-formula), ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 500;
+  }
+
+  /* Small uppercase eyebrow utility (works well with Chakra Petch headings) */
+  .eyebrow {
+    font-family: var(--font-home-display), var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    font-size: 0.85rem;
+  }
 }
