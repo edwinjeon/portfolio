@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import ProjectDetail from "@/components/ProjectDetail";
 import { projects } from "@/lib/projects";
 
+type Project = (typeof projects)[number];
+
 export const metadata: Metadata = {
   title: "KPI Dashboard | Weongyu Jeon",
   description:
@@ -11,5 +13,5 @@ export const metadata: Metadata = {
 export default function KpiDashboard() {
   const data = projects.find(p => p.slug === "kpi-dashboard");
   if (!data) throw new Error("Project not found: kpi-dashboard");
-  return <ProjectDetail data={data as any} />;
+  return <ProjectDetail data={data as Project} />;
 }

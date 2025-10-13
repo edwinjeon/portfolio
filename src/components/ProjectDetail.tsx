@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
-import { ArrowUpRight, Github, ExternalLink, BarChart4 } from "lucide-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useMemo, useState, useRef } from "react";
+import { ArrowUpRight, Github, ExternalLink, BarChart4, ChevronLeft, ChevronRight } from "lucide-react";
+import * as React from "react";
 
 import PageShell from "@/components/PageShell";
 import Chip from "@/components/Chip";
@@ -36,6 +35,8 @@ export type ProjectDetailData = {
   image?: string | StaticImageData;                // single image (fallback)
   images?: (string | StaticImageData)[];           // slideshow (preferred)
 };
+
+type ProjectDetailProps = { data: ProjectDetailData };
 
 /* =========================
    Small UI helpers
@@ -71,7 +72,7 @@ function normalizeTag(t: unknown) {
 /* =========================
    Component
    ========================= */
-export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
+export default function ProjectDetail({ data }: ProjectDetailProps) {
   const {
     title,
     summary,
@@ -85,21 +86,22 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
   } = data;
 
   // Build image list for slideshow (fallback to single image)
-  const imgs = useMemo<(string | StaticImageData)[]>(() => {
+  const imgs = React.useMemo<(string | StaticImageData)[]>(() => {
     if (Array.isArray(images) && images.length) return images;
     if (image) return [image];
     return [];
   }, [images, image]);
 
-  const [idx, setIdx] = useState(0);
+  const [idx, setIdx] = React.useState(0);
   const total = imgs.length;
   const hasCarousel = total > 1;
 
   const go = (n: number) => setIdx((p) => (p + n + total) % total);
 
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const [dragging, setDragging] = useState(false);
-  const [dragPx, setDragPx] = useState(0); // current drag offset in px
+  const trackRef = React.useRef<HTMLDivElement | null>(null);
+  const viewportRef = React.useRef<HTMLDivElement | null>(null);
+  const [dragging, setDragging] = React.useState(false);
+  const [dragPx, setDragPx] = React.useState(0); // current drag offset in px
 
   const onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
     if (!hasCarousel) return;
@@ -107,15 +109,29 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
     if (e.key === "ArrowRight") go(+1);
   };
 
-  // basic touch-swipe
-  const touchX = useRef<number | null>(null);
-  const onTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+  // Touch-swipe (defined once, then used)
+  const touchX = React.useRef<number | null>(null);
+
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
     touchX.current = e.touches[0].clientX;
+    setDragging(true);
+    setDragPx(0);
   };
-  const onTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
-    if (touchX.current === null) return;
+
+  const handleTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (touchX.current == null) return;
+    const dx = e.touches[0].clientX - touchX.current;
+    setDragPx(dx);
+  };
+
+  const handleTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (touchX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchX.current;
-    if (Math.abs(dx) > 40) go(dx > 0 ? -1 : +1);
+    const width = viewportRef.current?.clientWidth ?? 1;
+    const threshold = Math.max(40, width * 0.08);
+    if (Math.abs(dx) > threshold) go(dx > 0 ? -1 : +1);
+    setDragging(false);
+    setDragPx(0);
     touchX.current = null;
   };
 
@@ -138,17 +154,11 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
         {/* Header */}
         <header className="mb-10">
           <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
-          {summary && (
-            <p className="mt-3 text-white/85 leading-7">{summary}</p>
-          )}
+          {summary && <p className="mt-3 text-white/85 leading-7">{summary}</p>}
 
           {/* Row 2: date + tags */}
           <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-white/70">
-            {date && (
-              <span className="rounded bg-white/[0.06] px-2 py-0.5">
-                {date}
-              </span>
-            )}
+            {date && <span className="rounded bg-white/[0.06] px-2 py-0.5">{date}</span>}
 
             {cleanTags.length > 0 && (
               <div className="flex flex-wrap items-center gap-2">
@@ -192,54 +202,35 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
           </div>
         </header>
 
-        {/* Media / slideshow (arrows/dots only if multiple images) */}
+        {/* Media / slideshow */}
         {imgs.length > 0 && (
           <figure
             className="mb-8 relative rounded-2xl overflow-hidden border border-white/10"
             tabIndex={hasCarousel ? 0 : -1}
             onKeyDown={onKeyDown}
-            aria-label={
-              hasCarousel ? `Screenshot ${idx + 1} of ${total}` : "Project screenshot"
-            }
+            aria-label={hasCarousel ? `Screenshot ${idx + 1} of ${total}` : "Project screenshot"}
           >
             {/* Viewport */}
             <div
+              ref={viewportRef}
               className="relative w-full overflow-hidden aspect-video bg-white/[0.02]"
-              onTouchStart={(e) => {
-                touchX.current = e.touches[0].clientX;
-                setDragging(true);
-                setDragPx(0);
-              }}
-              onTouchMove={(e) => {
-                if (touchX.current == null) return;
-                const dx = e.touches[0].clientX - touchX.current;
-                setDragPx(dx);
-              }}
-              onTouchEnd={(e) => {
-                if (touchX.current == null) return;
-                const dx = e.changedTouches[0].clientX - touchX.current;
-                const width = trackRef.current?.clientWidth ?? 1;
-                const threshold = Math.max(40, (width / total) * 0.08);
-                if (Math.abs(dx) > threshold) go(dx > 0 ? -1 : +1);
-                setDragging(false);
-                setDragPx(0);
-                touchX.current = null;
-              }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
-
               {/* Sliding track */}
               <div
                 ref={trackRef}
                 className="flex h-full"
                 style={{
                   transform: `translateX(calc(${(-idx * 100).toString()}% + ${
-                    ((dragPx / (trackRef.current?.clientWidth ?? 1)) * 100 * total) || 0
+                    ((dragPx / (viewportRef.current?.clientWidth ?? 1)) * 100) || 0
                   }%))`,
                   transition: dragging ? "none" : "transform 360ms cubic-bezier(.22,.61,.36,1)",
                   willChange: "transform",
                 }}
               >
-                  {imgs.map((src, i) => (
+                {imgs.map((src, i) => (
                   <div key={i} className="relative w-full shrink-0 h-full">
                     <Image
                       src={src}
@@ -295,7 +286,6 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
           </figure>
         )}
 
-
         {/* Tools */}
         {tools.length > 0 && (
           <section className="mb-10 rounded-2xl border border-white/10 p-4">
@@ -315,7 +305,7 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
           </section>
         )}
 
-        {/* Body sections (supports inline links via dangerouslySetInnerHTML) */}
+        {/* Body sections */}
         <div className="max-w-none">
           {sections.length ? (
             sections.map((s) => (
@@ -334,11 +324,8 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
                 {/* Indented body */}
                 <div className="mt-3 space-y-4 text-white/85 leading-7">
                   {Array.isArray(s.content) ? (
-                    s.content.map((para, idx) => (
-                      <p
-                        key={idx}
-                        dangerouslySetInnerHTML={{ __html: para }}
-                      />
+                    s.content.map((para, i) => (
+                      <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
                     ))
                   ) : (
                     <p dangerouslySetInnerHTML={{ __html: s.content }} />
@@ -360,11 +347,8 @@ export default function ProjectDetail({ data }: { data: ProjectDetailData }) {
               <div className="mt-3 space-y-4 text-white/85 leading-7">
                 <p>
                   Content coming soon. Add a{" "}
-                  <code className="rounded bg-white/10 px-1.5 py-0.5">
-                    sections
-                  </code>{" "}
-                  array to this project’s entry in <code>lib/projects.ts</code>{" "}
-                  to render headings and paragraphs.
+                  <code className="rounded bg-white/10 px-1.5 py-0.5">sections</code>{" "}
+                  array to this project’s entry in <code>lib/projects.ts</code> to render headings and paragraphs.
                 </p>
               </div>
             </section>

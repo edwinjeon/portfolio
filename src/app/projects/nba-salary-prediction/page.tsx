@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import ProjectDetail from "@/components/ProjectDetail";
 import { projects } from "@/lib/projects";
 
+type Project = (typeof projects)[number];
+
 export const metadata: Metadata = {
   title: "NBA Salary Prediction | Weongyu Jeon",
   description:
@@ -11,5 +13,5 @@ export const metadata: Metadata = {
 export default function NbaSalaryPrediction() {
   const data = projects.find(p => p.slug === "nba-salary-prediction");
   if (!data) throw new Error("Project not found: nba-salary-prediction");
-  return <ProjectDetail data={data as any} />;
+  return <ProjectDetail data={data as Project} />;
 }
