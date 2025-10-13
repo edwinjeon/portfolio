@@ -1,5 +1,8 @@
 // 1) If you have an exported type, extend it:
 // At the top where your Project type/interface is defined
+// src/lib/projects.ts
+import type { StaticImageData } from "next/image";
+
 export type Project = {
   slug: string;
   title: string;
@@ -15,8 +18,8 @@ export type Project = {
     demo?: string;
   };
   sections?: { id: string; title: string; content: string | string[] }[];
-  image?: string | StaticImageData;              // backward-compatible
-  images?: (string | StaticImageData)[]; 
+  image?: string | StaticImageData;              // you already have these
+  images?: (string | StaticImageData)[];
 };
 
 
