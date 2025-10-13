@@ -27,7 +27,7 @@ type AnchorChipProps = CommonProps & {
 
 type ChipProps = SpanChipProps | ButtonChipProps | AnchorChipProps;
 
-export default function Chip(props: ChipProps): JSX.Element | null {
+export default function Chip(props: ChipProps) {
   const {
     children,
     active = false,
