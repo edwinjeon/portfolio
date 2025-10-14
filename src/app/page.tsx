@@ -82,7 +82,7 @@ export default function HomeGrid() {
         <HoverFormulaCell c={7} r={5} formula='=Instagram()' result="@0329__re" />
 
         {/* Keep a couple purely blurred stat-like cells if you want */}
-        <BlurCell c={5} r={6} text="Give me any dataset!" />
+        <BlurCell c={5} r={6} text="Send me any dataset!" />
       </div>
     </main>
   );
