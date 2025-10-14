@@ -20,12 +20,15 @@ export default function TopBar() {
 
       <div className="mx-auto flex h-14 max-w-6xl items-center px-4">
         {/* Left: file name */}
-        <div
-          className="min-w-0 text-[13px] leading-none text-slate-300"
+        {/* Left: file name (now clickable) */}
+        <Link
+          href="/"
+          className="min-w-0 text-[13px] leading-none text-slate-300 hover:text-white transition-colors"
           style={{ fontFamily: "var(--font-formula)", letterSpacing: "0.02em" }}
         >
           Weongyu Jeon.xlsx
-        </div>
+        </Link>
+
 
         {/* Center: nav */}
         <nav className="mx-auto flex items-center gap-8">
