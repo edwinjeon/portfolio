@@ -75,14 +75,14 @@ export default function HomeGrid() {
 
 
         {/* ===== NON-MAIN: INTERACTIVE FORMULA → RESULT ===== */}
-        <HoverFormulaCell c={1} r={2} formula="=Living()" result="Seoul 🇰🇷" />
+        <HoverFormulaCell c={1} r={4} formula="=Living()" result="Seoul 🇰🇷" />
         <HoverFormulaCell c={5} r={1} formula="=Studying()" result="IS @ CMU" />
         <HoverFormulaCell c={7} r={2} formula='=List("Skills")' result={<span>Python<br />Tableau<br />SQL</span>}/>
-        <HoverFormulaCell c={2} r={5} formula='=Coffee_Intake()' result="3 cups/day" />
+        <HoverFormulaCell c={3} r={6} formula='=Coffee_Intake()' result="3 cups/day" />
         <HoverFormulaCell c={7} r={5} formula='=Instagram()' result="@0329__re" />
 
         {/* Keep a couple purely blurred stat-like cells if you want */}
-        <BlurCell c={5} r={6} text="Send me any dataset!" />
+        <BlurCell c={2} r={1} text="Try hover over cells!" />
       </div>
     </main>
   );
