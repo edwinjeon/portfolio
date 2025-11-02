@@ -58,13 +58,14 @@ export default function HomeMobile() {
 
   return (
     <main className="relative h-dvh w-screen overflow-hidden bg-[#0B0F1E] text-[#E5E7EB]">
-      <div
-        className="grid h-full w-full place-content-center"
-        style={{
-          gridTemplateColumns: `repeat(${COLS + 1}, ${cw})`,
-          gridTemplateRows: `repeat(${ROWS + 1}, ${ch})`,
-        }}
-      >
+        <div
+          className="grid h-full w-full"
+          style={{
+            gridTemplateColumns: `repeat(${COLS + 1}, ${cw})`,
+            gridTemplateRows: `1fr repeat(${ROWS}, 1fr)`, // first row = headers, rest stretch equally
+          }}
+        >
+
         {/* Column headers A–D */}
         {Array.from({ length: COLS }).map((_, i) => (
           <div
