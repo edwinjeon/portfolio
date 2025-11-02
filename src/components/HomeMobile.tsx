@@ -77,24 +77,24 @@ export default function HomeMobile() {
         </BodyCell>
 
         {/* About / Projects on row 2 */}
-        <BodyLink c={1} r={2} href="/about" display>
+        <BodyLink c={1} r={3} href="/about" display>
           <span className="text-[clamp(16px,4.2vw,20px)]">About</span>
         </BodyLink>
-        <BodyLink c={2} r={2} href="/projects" display>
+        <BodyLink c={2} r={3} href="/projects" display>
           <span className="text-[clamp(16px,4.2vw,20px)]">Projects</span>
         </BodyLink>
 
         {/* Icons on row 3 */}
-        <BodyLink c={1} r={3} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
+        <BodyLink c={1} r={4} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
           <Github className="h-6 w-6" />
         </BodyLink>
-        <BodyLink c={2} r={3} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
+        <BodyLink c={2} r={4} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
           <Linkedin className="h-6 w-6" />
         </BodyLink>
-        <BodyLink c={3} r={3} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
+        <BodyLink c={3} r={4} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
           <span className="font-semibold text-lg">K</span>
         </BodyLink>
-        <BodyLink c={4} r={3} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
+        <BodyLink c={4} r={4} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
           <Mail className="h-6 w-6" />
         </BodyLink>
       </div>
