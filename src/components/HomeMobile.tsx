@@ -2,36 +2,43 @@
 
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
+import type React from "react";
 
 /**
  * Mobile Excel-style homepage
  * - Column headers A–D
- * - Row numbers (left gutter), narrow and right-aligned
- * - Name in body (col 1, row 1), spanning 2 columns
- * - No scroll: header + rows fill exactly 100dvh
+ * - Row numbers (left gutter), tight and right-aligned
+ * - Name in A1 spanning B1
+ * - No scroll (fills 100dvh exactly)
  */
+
+/* Type-safe CSS vars for the style prop */
+type CSSVars = React.CSSProperties & {
+  ["--hdr"]?: string; // header height
+  ["--gut"]?: string; // left gutter width
+};
+
 export default function HomeMobile() {
   const COLS = 4;        // A..D
-  const BODY_ROWS = 6;   // body rows (1..6)
+  const BODY_ROWS = 6;   // 1..6
 
-  // CSS vars to precisely allocate space
+  // layout variables
   const headerH = "clamp(12px, 4.2dvh, 22px)";          // small header row
-  const gutterW = "clamp(14px, 4.2dvw, 22px)";          // narrow left gutter (row numbers)
+  const gutterW = "clamp(14px, 4.2dvw, 22px)";          // narrow left gutter
   const cw = `calc((100dvw - var(--gut)) / ${COLS})`;   // each data column width
   const rows = `var(--hdr) repeat(${BODY_ROWS}, calc((100dvh - var(--hdr)) / ${BODY_ROWS}))`;
 
+  const gridStyle: CSSVars = {
+    ["--hdr"]: headerH,
+    ["--gut"]: gutterW,
+    gridTemplateColumns: `${gutterW} repeat(${COLS}, ${cw})`,
+    gridTemplateRows: rows,
+  };
+
   return (
     <main className="relative h-dvh w-screen overflow-hidden bg-[#0B0F1E] text-[#E5E7EB]">
-      <div
-        className="grid h-full w-full"
-        style={{
-          ["--hdr" as any]: headerH,
-          ["--gut" as any]: gutterW,
-          gridTemplateColumns: `${gutterW} repeat(${COLS}, ${cw})`,
-          gridTemplateRows: rows,
-        }}
-      >
-        {/* ===== Column headers (A–D) at top, above body ===== */}
+      <div className="grid h-full w-full" style={gridStyle}>
+        {/* Column headers A–D */}
         {Array.from({ length: COLS }).map((_, i) => (
           <div
             key={`col-${i}`}
@@ -42,7 +49,7 @@ export default function HomeMobile() {
           </div>
         ))}
 
-        {/* ===== Row numbers in left gutter, right-aligned & snug ===== */}
+        {/* Row numbers (left gutter), right-aligned and snug */}
         {Array.from({ length: BODY_ROWS }).map((_, i) => (
           <div
             key={`row-${i}`}
@@ -53,7 +60,7 @@ export default function HomeMobile() {
           </div>
         ))}
 
-        {/* ===== Grid borders for the body cells ===== */}
+        {/* Body grid borders */}
         {Array.from({ length: BODY_ROWS }).map((_, r) =>
           Array.from({ length: COLS }).map((_, c) => (
             <div
@@ -64,9 +71,7 @@ export default function HomeMobile() {
           ))
         )}
 
-        {/* ===== BODY CONTENT (c,r start at 1,1 for A1) ===== */}
-
-        {/* Name at col=1,row=1 spanning 2 columns */}
+        {/* Name at A1 spanning B1, centered */}
         <BodyCell c={1} r={1} colSpan={2} display className="text-center">
           <span className="text-[clamp(17px,4.3vw,21px)]">Weongyu Jeon</span>
         </BodyCell>
@@ -97,7 +102,7 @@ export default function HomeMobile() {
   );
 }
 
-/* ===== Helpers that map body coords (A1 = c1,r1) to grid positions (offset by gutter/header) ===== */
+/* ===== Helpers map body coords (A1 = c1,r1) to grid positions (offset by gutter/header) ===== */
 
 function BodyCell({
   c, r, children, display = false, className = "", colSpan = 1, rowSpan = 1,
