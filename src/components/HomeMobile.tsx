@@ -62,24 +62,24 @@ export default function HomeMobile() {
         </Cell>
 
         {/* About / Projects (same row, side-by-side) */}
-        <LinkCell col={2} row={3} href="/about" display>
+        <LinkCell col={2} row={4} href="/about" display>
           <span className="text-[clamp(16px,4.2vw,20px)]">About</span>
         </LinkCell>
-        <LinkCell col={3} row={3} href="/projects" display>
+        <LinkCell col={3} row={4} href="/projects" display>
           <span className="text-[clamp(16px,4.2vw,20px)]">Projects</span>
         </LinkCell>
 
         {/* Icon row */}
-        <LinkCell col={1} row={4} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
+        <LinkCell col={1} row={5} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
           <Github className="h-6 w-6" />
         </LinkCell>
-        <LinkCell col={2} row={4} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
+        <LinkCell col={2} row={5} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
           <Linkedin className="h-6 w-6" />
         </LinkCell>
-        <LinkCell col={3} row={4} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
+        <LinkCell col={3} row={5} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
           <span className="font-semibold text-lg">K</span>
         </LinkCell>
-        <LinkCell col={4} row={4} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
+        <LinkCell col={4} row={5} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
           <Mail className="h-6 w-6" />
         </LinkCell>
       </div>
