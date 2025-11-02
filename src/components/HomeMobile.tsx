@@ -99,7 +99,7 @@ export default function HomeMobile() {
         )}
 
         {/* Main cells (no hover cells on mobile) */}
-        <MainCell c={2} r={2} display className="text-[clamp(18px,4.8vw,22px)]">
+        <MainCell c={2} r={2} display className="text-[clamp(16px,4.2vw,20px)]">
           Weongyu Jeon
         </MainCell>
 
