@@ -17,7 +17,7 @@ function useIsSmall() {
   return isSmall;
 }
 
-export function DesktopHome() {
+function DesktopHome() {
   const isSmall = useIsSmall();
 
   // Desktop = 8×6; Mobile = 4×8
