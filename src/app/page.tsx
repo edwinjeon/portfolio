@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
+import HomeMobile from "@/components/HomeMobile";
 
 // Detect small screens (≤640px)
 function useIsSmall() {
@@ -16,7 +17,7 @@ function useIsSmall() {
   return isSmall;
 }
 
-export default function HomeGrid() {
+export function DesktopHome() {
   const isSmall = useIsSmall();
 
   // Desktop = 8×6; Mobile = 4×8
@@ -292,5 +293,22 @@ function BlurCell({
     >
       {text}
     </div>
+  );
+}
+
+// Put this at the very end of page.tsx
+export default function Page() {
+  return (
+    <>
+      {/* Desktop / tablet (≥640px): show your original spreadsheet homepage */}
+      <div className="hidden sm:block">
+        <DesktopHome />
+      </div>
+
+      {/* Mobile (<640px): show simplified mobile homepage */}
+      <div className="block sm:hidden">
+        <HomeMobile />
+      </div>
+    </>
   );
 }
