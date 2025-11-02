@@ -23,8 +23,8 @@ export default function HomeMobile() {
   const BODY_ROWS = 6;   // 1..6
 
   // layout variables
-  const headerH = "clamp(12px, 4.2dvh, 22px)";          // small header row
-  const gutterW = "clamp(14px, 4.2dvw, 22px)";          // narrow left gutter
+  const headerH = "clamp(14px, 4.7dvh, 24px)";          // small header row
+  const gutterW = "clamp(18px, 5dvw, 26px)";          // narrow left gutter
   const cw = `calc((100dvw - var(--gut)) / ${COLS})`;   // each data column width
   const rows = `var(--hdr) repeat(${BODY_ROWS}, calc((100dvh - var(--hdr)) / ${BODY_ROWS}))`;
 
@@ -43,7 +43,7 @@ export default function HomeMobile() {
           <div
             key={`col-${i}`}
             style={{ gridColumn: i + 2, gridRow: 1 }}
-            className="flex items-center justify-center text-[9px] leading-none text-white/45"
+            className="flex items-center justify-center text-[10px] leading-none text-white/50"
           >
             {String.fromCharCode(65 + i)}
           </div>
@@ -54,7 +54,7 @@ export default function HomeMobile() {
           <div
             key={`row-${i}`}
             style={{ gridColumn: 1, gridRow: i + 2 }}
-            className="flex items-center justify-end pr-[2px] text-[10px] leading-none text-white/55"
+            className="flex items-center justify-end pr-[4px] text-[11px] leading-none text-white/60"
           >
             {i + 1}
           </div>
@@ -72,7 +72,7 @@ export default function HomeMobile() {
         )}
 
         {/* Name at A1 spanning B1, centered */}
-        <BodyCell c={1} r={1} colSpan={2} display className="text-center">
+        <BodyCell c={1} r={1} colSpan={2} display merged className="text-center">
           <span className="text-[clamp(17px,4.3vw,21px)]">Weongyu Jeon</span>
         </BodyCell>
 
@@ -105,10 +105,10 @@ export default function HomeMobile() {
 /* ===== Helpers map body coords (A1 = c1,r1) to grid positions (offset by gutter/header) ===== */
 
 function BodyCell({
-  c, r, children, display = false, className = "", colSpan = 1, rowSpan = 1,
+  c, r, children, display = false, className = "", colSpan = 1, rowSpan = 1, merged = false,
 }: {
   c: number; r: number; children: React.ReactNode; display?: boolean; className?: string;
-  colSpan?: number; rowSpan?: number;
+  colSpan?: number; rowSpan?: number; merged?: boolean;
 }) {
   return (
     <div
@@ -118,7 +118,7 @@ function BodyCell({
         fontFamily: display ? "var(--font-home-display)" : undefined,
         fontWeight: display ? 600 : undefined,
       }}
-      className={`relative z-10 flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/10 ${className}`}
+      className={`relative ${merged ? "z-20 bg-[#0B0F1E] ring-1 ring-white/15" : "z-10"} flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/10 ${className}`}
     >
       {children}
     </div>
