@@ -7,25 +7,24 @@ import type React from "react";
 /**
  * Mobile Excel-style homepage
  * - Column headers A–D
- * - Row numbers (left gutter), tight and right-aligned
- * - Name in A1 spanning B1
- * - No scroll (fills 100dvh exactly)
+ * - Row numbers (left gutter)
+ * - "Weongyu Jeon" merged across A1–B1
+ * - No scroll, fills 100dvh
  */
 
-/* Type-safe CSS vars for the style prop */
 type CSSVars = React.CSSProperties & {
-  ["--hdr"]?: string; // header height
-  ["--gut"]?: string; // left gutter width
+  ["--hdr"]?: string;
+  ["--gut"]?: string;
 };
 
 export default function HomeMobile() {
-  const COLS = 4;        // A..D
-  const BODY_ROWS = 6;   // 1..6
+  const COLS = 4;
+  const BODY_ROWS = 6;
 
-  // layout variables
-  const headerH = "clamp(14px, 4.7dvh, 24px)";          // small header row
-  const gutterW = "clamp(18px, 5dvw, 26px)";          // narrow left gutter
-  const cw = `calc((100dvw - var(--gut)) / ${COLS})`;   // each data column width
+  // rollback to roomy header/gutter
+  const headerH = "clamp(16px, 5.5dvh, 28px)";
+  const gutterW = "clamp(22px, 6dvw, 32px)";
+  const cw = `calc((100dvw - var(--gut)) / ${COLS})`;
   const rows = `var(--hdr) repeat(${BODY_ROWS}, calc((100dvh - var(--hdr)) / ${BODY_ROWS}))`;
 
   const gridStyle: CSSVars = {
@@ -38,23 +37,23 @@ export default function HomeMobile() {
   return (
     <main className="relative h-dvh w-screen overflow-hidden bg-[#0B0F1E] text-[#E5E7EB]">
       <div className="grid h-full w-full" style={gridStyle}>
-        {/* Column headers A–D */}
+        {/* Column headers A–D (airy spacing) */}
         {Array.from({ length: COLS }).map((_, i) => (
           <div
             key={`col-${i}`}
             style={{ gridColumn: i + 2, gridRow: 1 }}
-            className="flex items-center justify-center text-[10px] leading-none text-white/50"
+            className="flex items-center justify-center text-[9px] leading-[1] text-white/45 tracking-wide"
           >
             {String.fromCharCode(65 + i)}
           </div>
         ))}
 
-        {/* Row numbers (left gutter), right-aligned and snug */}
+        {/* Row numbers (roomier gutter, right aligned) */}
         {Array.from({ length: BODY_ROWS }).map((_, i) => (
           <div
             key={`row-${i}`}
             style={{ gridColumn: 1, gridRow: i + 2 }}
-            className="flex items-center justify-end pr-[4px] text-[11px] leading-none text-white/60"
+            className="flex items-center justify-end pr-[6px] text-[10px] leading-[1] text-white/55"
           >
             {i + 1}
           </div>
@@ -71,30 +70,30 @@ export default function HomeMobile() {
           ))
         )}
 
-        {/* Name at A1 spanning B1, centered */}
+        {/* === Merged name cell (A1–B1) === */}
         <BodyCell c={1} r={1} colSpan={2} display merged className="text-center">
           <span className="text-[clamp(17px,4.3vw,21px)]">Weongyu Jeon</span>
         </BodyCell>
 
-        {/* About / Projects on row 2 */}
-        <BodyLink c={1} r={3} href="/about" display>
+        {/* About / Projects row */}
+        <BodyLink c={1} r={2} href="/about" display>
           <span className="text-[clamp(16px,4.2vw,20px)]">About</span>
         </BodyLink>
-        <BodyLink c={2} r={3} href="/projects" display>
+        <BodyLink c={2} r={2} href="/projects" display>
           <span className="text-[clamp(16px,4.2vw,20px)]">Projects</span>
         </BodyLink>
 
-        {/* Icons on row 3 */}
-        <BodyLink c={1} r={4} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
+        {/* Icons row */}
+        <BodyLink c={1} r={3} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
           <Github className="h-6 w-6" />
         </BodyLink>
-        <BodyLink c={2} r={4} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
+        <BodyLink c={2} r={3} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
           <Linkedin className="h-6 w-6" />
         </BodyLink>
-        <BodyLink c={3} r={4} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
+        <BodyLink c={3} r={3} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
           <span className="font-semibold text-lg">K</span>
         </BodyLink>
-        <BodyLink c={4} r={4} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
+        <BodyLink c={4} r={3} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
           <Mail className="h-6 w-6" />
         </BodyLink>
       </div>
@@ -102,23 +101,38 @@ export default function HomeMobile() {
   );
 }
 
-/* ===== Helpers map body coords (A1 = c1,r1) to grid positions (offset by gutter/header) ===== */
+/* === Helpers === */
 
 function BodyCell({
-  c, r, children, display = false, className = "", colSpan = 1, rowSpan = 1, merged = false,
+  c,
+  r,
+  children,
+  display = false,
+  className = "",
+  colSpan = 1,
+  rowSpan = 1,
+  merged = false,
 }: {
-  c: number; r: number; children: React.ReactNode; display?: boolean; className?: string;
-  colSpan?: number; rowSpan?: number; merged?: boolean;
+  c: number;
+  r: number;
+  children: React.ReactNode;
+  display?: boolean;
+  className?: string;
+  colSpan?: number;
+  rowSpan?: number;
+  merged?: boolean;
 }) {
   return (
     <div
       style={{
-        gridColumn: `${c + 1} / span ${colSpan}`, // +1 to skip gutter
-        gridRow: `${r + 1} / span ${rowSpan}`,    // +1 to skip header
+        gridColumn: `${c + 1} / span ${colSpan}`,
+        gridRow: `${r + 1} / span ${rowSpan}`,
         fontFamily: display ? "var(--font-home-display)" : undefined,
         fontWeight: display ? 600 : undefined,
       }}
-      className={`relative ${merged ? "z-20 bg-[#0B0F1E] ring-1 ring-white/15" : "z-10"} flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/10 ${className}`}
+      className={`relative ${
+        merged ? "z-20 bg-[#0B0F1E] ring-1 ring-white/15" : "z-10"
+      } flex items-center justify-center text-white transition-colors duration-150 hover:bg-white/10 ${className}`}
     >
       {children}
     </div>
@@ -126,10 +140,27 @@ function BodyCell({
 }
 
 function BodyLink({
-  c, r, href, target, ariaLabel, children, display = false, className = "", colSpan = 1, rowSpan = 1,
+  c,
+  r,
+  href,
+  target,
+  ariaLabel,
+  children,
+  display = false,
+  className = "",
+  colSpan = 1,
+  rowSpan = 1,
 }: {
-  c: number; r: number; href: string; target?: "_blank"; ariaLabel?: string; children: React.ReactNode;
-  display?: boolean; className?: string; colSpan?: number; rowSpan?: number;
+  c: number;
+  r: number;
+  href: string;
+  target?: "_blank";
+  ariaLabel?: string;
+  children: React.ReactNode;
+  display?: boolean;
+  className?: string;
+  colSpan?: number;
+  rowSpan?: number;
 }) {
   return (
     <Link
