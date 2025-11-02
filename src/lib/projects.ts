@@ -37,6 +37,10 @@ export const projects: Project[] = [
     github: "https://github.com/edwinjeon/NBA-Salary-Prediction",
     kaggle: "https://www.kaggle.com/ratin21"
   },
+  links: [
+    { label: "GitHub", href: "https://github.com/edwinjeon/NBA-Salary-Prediction" },
+    { label: "Read details →", href: "/projects/nba-salary-prediction" },
+  ],
   summary:
     "Predicting NBA player salary with ML/DL models trained with years of stats and salary data.",
   sections: [

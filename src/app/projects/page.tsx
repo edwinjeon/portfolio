@@ -78,7 +78,7 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Row 2: one-line summary */}
-                <p className="mt-2 px-1 text-white/70 truncate">{p.summary}</p>
+                <p className="mt-2 px-1 text-white/70 leading-relaxed">{p.summary}</p>
 
                 {/* Mobile: external links under summary */}
                 {p.links && (
