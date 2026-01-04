@@ -6,9 +6,9 @@ import { Analytics } from "@vercel/analytics/react";
 
 
 export const metadata: Metadata = {
-  title: "Weongyu Jeon",
-  description: "Weongyu Jeon - Data",
-  metadataBase: new URL("https://weongyujeon.com"),
+  title: "Wongyu Jeon",
+  description: "Wongyu Jeon - Data",
+  metadataBase: new URL("https://wongyujeon.com"),
   icons: { icon: "/favicon.png" },
   viewport: { width: "device-width", initialScale: 1, viewportFit: "cover" },
 };

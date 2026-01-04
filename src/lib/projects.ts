@@ -110,12 +110,12 @@ export const projects: Project[] = [
   image: "/KPI.png",
   images: ["/KPI1.png", "/KPI2.png", "/KPI3.png", "/KPI4.png"],
   links: [
-    { label: "Tableau", href: "https://public.tableau.com/app/profile/weongyu.jeon/viz/AdventureWorks_17554251590910/Executive" },
+    { label: "Tableau", href: "https://public.tableau.com/shared/BS2YJ9KP4?:display_count=n&:origin=viz_share_link" },
     { label: "Read details →", href: "/projects/kpi-dashboard" },
   ],
   date: "Sep 2025",
   detailLinks: {
-    tableau: "https://public.tableau.com/app/profile/weongyu.jeon/viz/AdventureWorks_17554251590910/Executive",
+    tableau: "https://public.tableau.com/shared/BS2YJ9KP4?:display_count=n&:origin=viz_share_link",
   },
   sections: [
   {
@@ -195,12 +195,12 @@ export const projects: Project[] = [
   image: "/Happiness.png",
   images: ["/Happiness1.png", "/Happiness2.png", "/Happiness3.png", "/Happiness4.png", "/Happiness5.png", "/Happiness6.png"],
   links: [
-    { label: "Tableau", href: "https://public.tableau.com/app/profile/weongyu.jeon/viz/TrueFactorsofHappiness/Page1" },
+    { label: "Tableau", href: "https://public.tableau.com/app/profile/wongyujeon/viz/TrueFactorsofHappiness/Page1" },
     { label: "Read details →", href: "/projects/true-factors-of-happiness" },
   ],
   date: "Aug 2025",
   detailLinks: {
-    tableau: "https://public.tableau.com/app/profile/weongyu.jeon/viz/TrueFactorsofHappiness/Page1",
+    tableau: "https://public.tableau.com/app/profile/wongyujeon/viz/TrueFactorsofHappiness/Page1",
     github: "https://github.com/edwinjeon/True-Factors-of-Happiness",
   },
   sections: [

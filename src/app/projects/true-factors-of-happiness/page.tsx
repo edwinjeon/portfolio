@@ -5,7 +5,7 @@ import { projects } from "@/lib/projects";
 type Project = (typeof projects)[number];
 
 export const metadata: Metadata = {
-  title: "True Factors of Happiness | Weongyu Jeon",
+  title: "True Factors of Happiness | Wongyu Jeon",
   description:
     "A Tableau narrative dashboard exploring the psychological and social roots of happiness through data.",
 };

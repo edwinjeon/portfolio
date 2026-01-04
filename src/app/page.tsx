@@ -87,7 +87,7 @@ function DesktopHome() {
         {/* ===== MAIN CONTENT ===== */}
         {/* Row 3 (labels) — Home removed, About/Projects shifted */}
         <MainCell c={nameCol} r={textRow} display>
-          Weongyu Jeon
+          Wongyu Jeon
         </MainCell>
         <MainLinkCell c={aboutCol} r={textRow} href="/about" display>
           About
@@ -109,7 +109,7 @@ function DesktopHome() {
         <MainLinkCell
           c={iconStartCol + 1}
           r={iconRow}
-          href="https://www.linkedin.com/in/weongyujeon/"
+          href="https://www.linkedin.com/in/wongyujeon/"
           target="_blank"
           ariaLabel="LinkedIn"
         >
@@ -127,7 +127,7 @@ function DesktopHome() {
         <MainLinkCell
           c={iconStartCol + 3}
           r={iconRow}
-          href="mailto:weongyujeon@gmail.com"
+          href="mailto:wongyujeon1@gmail.com"
           ariaLabel="Email"
         >
           <Mail className="h-5 w-5" />

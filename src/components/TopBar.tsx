@@ -27,7 +27,7 @@ export default function TopBar() {
             className="min-w-0 truncate text-[clamp(12px,2.8vw,13px)] leading-none text-slate-300 hover:text-white transition-colors"
             style={{ fontFamily: "var(--font-formula)", letterSpacing: "0.02em" }}
           >
-            Weongyu Jeon.xlsx
+            Wongyu Jeon.xlsx
           </Link>
 
           {/* Center: nav (centers on mobile, normal on desktop) */}
@@ -60,7 +60,7 @@ export default function TopBar() {
             </Link>
 
             <Link
-              href="https://www.linkedin.com/in/weongyujeon/"
+              href="https://www.linkedin.com/in/wongyujeon/"
               target="_blank"
               aria-label="LinkedIn"
               className="p-2 min-w-11 min-h-11 inline-flex items-center justify-center hover:text-white transition-colors"
@@ -78,7 +78,7 @@ export default function TopBar() {
             </Link>
 
             <Link
-              href="mailto:weongyujeon@gmail.com"
+              href="mailto:wongyujeon1@gmail.com"
               aria-label="Email"
               className="p-2 min-w-11 min-h-11 inline-flex items-center justify-center hover:text-white transition-colors"
             >

@@ -3,7 +3,7 @@ import Image from "next/image";
 import PageShell from "@/components/PageShell";
 
 export const metadata = {
-  title: "About | Weongyu Jeon",
+  title: "About | Wongyu Jeon",
   description:
     "Information Systems student at Carnegie Mellon University, focusing on data, analytics, and storytelling.",
 };
@@ -15,7 +15,7 @@ export default function AboutPage() {
         <div className="mb-8 h-75 w-75 overflow-hidden rounded-full ring-1 ring-white/15 shadow-[0_0_0_6px_rgba(255,255,255,0.02)]">
           <Image
             src="/about.jpg"
-            alt="Weongyu Jeon"
+            alt="Wongyu Jeon"
             width={352}
             height={352}
             className="h-full w-full object-cover"
@@ -28,12 +28,11 @@ export default function AboutPage() {
 
       <main className="mx-auto max-w-3xl leading-8 space-y-6 text-white/85">
         <p>
-          I’m <strong className="text-white">Weongyu Jeon</strong>, an Information Systems student at
-          <strong className="text-white"> Carnegie Mellon University</strong>, concentrating in
-          <strong className="text-white"> Business Analytics</strong>.
+          I’m <strong className="text-white">Wongyu Jeon</strong>, an Information Systems student at
+          <strong className="text-white"> Carnegie Mellon University</strong>, concentrating in Business Analytics.
         </p>
         <p>
-          My work, and much of my personal curiosity, centers around data. I
+          My work, and much of my personal curiosity, centers around <strong className="text-white">data</strong>. I
           believe numerical data is the most powerful tool to explain and improve the world we
           live in. Studying Information Systems allows me to build expertise upon this
           passion, and I plan to continue pursuing it as a data analyst.
@@ -49,7 +48,7 @@ export default function AboutPage() {
           Through college and various personal projects, I’ve learned to use collaborative
           tools that support every step of the data process — from collection and
           cleaning to analysis and visualization. Yet, more than the tools
-          themselves, I’ve grasped how to persuade others see the story behind the
+          themselves, I’ve grasped how to persuade others to observe the story behind the
           numbers.
         </p>
       </main>

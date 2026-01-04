@@ -12,7 +12,7 @@ export default function Navbar() {
           {/* Brand */}
           <Link href="/" className="inline-flex items-baseline gap-2">
             <span className={`${dmSerif.className} text-xl leading-none tracking-tight`}>
-              Weongyu Jeon
+              Wongyu Jeon
             </span>
           </Link>
 
@@ -34,7 +34,7 @@ export default function Navbar() {
               <Github size={18} strokeWidth={1.8} />
             </a>
             <a
-              href="https://www.linkedin.com/in/weongyujeon/"
+              href="https://www.linkedin.com/in/wongyujeon/"
               target="_blank"
               rel="noreferrer"
               className="hover:text-[#22D3EE] transition-colors"
@@ -53,7 +53,7 @@ export default function Navbar() {
                 <path d="M9.48 12.7L15.47 6h2.24l-6.09 6.7 6.38 7.3h-2.33l-6.2-7.02v7.02H7.96V4.7h1.52v8z" />
               </svg>
             </a>
-            <a href="mailto:weongyujeon@gmail.com" className="hover:text-[#22D3EE] transition-colors" aria-label="Email">
+            <a href="mailto:wongyujeon1@gmail.com" className="hover:text-[#22D3EE] transition-colors" aria-label="Email">
               <Mail size={18} strokeWidth={1.8} />
             </a>
           </nav>

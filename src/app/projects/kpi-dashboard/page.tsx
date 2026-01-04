@@ -5,7 +5,7 @@ import { projects } from "@/lib/projects";
 type Project = (typeof projects)[number];
 
 export const metadata: Metadata = {
-  title: "KPI Dashboard | Weongyu Jeon",
+  title: "KPI Dashboard | Wongyu Jeon",
   description:
     "A business intelligence dashboard tracking KPIs across products, customers, and HR using SQL and Tableau.",
 };

@@ -101,7 +101,7 @@ export default function HomeMobile() {
 
         {/* Main cells (no hover cells on mobile) */}
         <MergedCell c={2} r={2} colSpan={2} display className="text-center">
-          <span className="text-[clamp(17px,4.3vw,21px)]">Weongyu Jeon</span>
+          <span className="text-[clamp(17px,4.3vw,21px)]">Wongyu Jeon</span>
         </MergedCell>
 
         <MainLinkCell c={2} r={3} href="/about" display>
@@ -114,13 +114,13 @@ export default function HomeMobile() {
         <MainLinkCell c={1} r={4} href="https://github.com/edwinjeon" target="_blank" ariaLabel="GitHub">
           <Github className="h-6 w-6" />
         </MainLinkCell>
-        <MainLinkCell c={2} r={4} href="https://www.linkedin.com/in/weongyujeon/" target="_blank" ariaLabel="LinkedIn">
+        <MainLinkCell c={2} r={4} href="https://www.linkedin.com/in/wongyujeon/" target="_blank" ariaLabel="LinkedIn">
           <Linkedin className="h-6 w-6" />
         </MainLinkCell>
         <MainLinkCell c={3} r={4} href="https://www.kaggle.com/ratin21" target="_blank" ariaLabel="Kaggle">
           <span className="font-semibold text-lg">K</span>
         </MainLinkCell>
-        <MainLinkCell c={4} r={4} href="mailto:weongyujeon@gmail.com" ariaLabel="Email">
+        <MainLinkCell c={4} r={4} href="mailto:wongyujeon1@gmail.com" ariaLabel="Email">
           <Mail className="h-6 w-6" />
         </MainLinkCell>
       </div>

@@ -5,7 +5,7 @@ import { projects } from "@/lib/projects";
 type Project = (typeof projects)[number];
 
 export const metadata: Metadata = {
-  title: "NBA Salary Prediction | Weongyu Jeon",
+  title: "NBA Salary Prediction | Wongyu Jeon",
   description:
     "NBA player salary prediction using traditional stats, machine learning, and deep learning.",
 };
